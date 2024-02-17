@@ -1,0 +1,54 @@
+﻿@model Movies
+
+
+@{
+    ViewData["Title"] = "Collection";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<br />
+
+<!-- Form -->
+
+<form method="post">
+    <label asp-for="Category">Category:</label>
+    <input asp-for="Category" class="form-control" required><br><br>
+
+    <label asp-for="Title">Title:</label>
+    <input asp-for="Title" class="form-control" required><br><br>
+
+    <label asp-for="Year">Year:</label>
+    <input asp-for="Year" class="form-control" type="number" required><br><br>
+
+    <label asp-for="Director">Director:</label>
+    <input asp-for="Director" class="form-control" required><br><br>
+
+    <label asp-for="Rating">Rating:</label>
+    <select asp-for="Rating" class="form-control" required>
+        <option value="G">G</option>
+        <option value="PG">PG</option>
+        <option value="PG-13">PG-13</option>
+        <option value="R">R</option>
+    </select><br><br>
+
+    <label asp-for="Edited">Edited:</label>
+    <select asp-for="Edited" class="form-control">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select><br><br>
+
+    <label asp-for="LentTo">Lent to:</label>
+    <input asp-for="LentTo" class="form-control"><br><br>
+
+    <label asp-for="Notes">Notes:</label>
+    <input asp-for="Notes" class="form-control" maxlength="25"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
+<hr class="m-0" />
+
