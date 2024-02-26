@@ -8,7 +8,7 @@ namespace Mission6.Models
         {
 
         }
-
+        // hello test
         public DbSet<Movies> Movies { get; set; }
     }
 }
