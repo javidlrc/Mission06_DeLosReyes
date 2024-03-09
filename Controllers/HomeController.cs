@@ -28,20 +28,78 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult Collection()
         {
-
-            return View("Collection");
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x =>  x.CategoryName)
+                .ToList();
+            return View("Collection", new Movies());
         }
 
         [HttpPost]
         public IActionResult Collection(Movies response)
         {
-            _context.Movies.Add(response);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response);
+                _context.SaveChanges();
             
-            return View("Confirmation", response);
+                return View("Confirmation", response);
+            }
+            else
+            {
+                ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+                return View(response);
+            }
+            
         }
 
-      
-      
+        public IActionResult Movielist()
+        {
+            var movies = _context.Movies
+                .OrderBy(x => x.MovieId).ToList();
+
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+            
+            ViewBag.Categories = _context.Categories
+               .OrderBy(x => x.CategoryName)
+               .ToList();
+
+            return View("Collection", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movies updatedInfo)
+        {
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Movielist");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movies deletedInfo)
+        {
+            _context.Movies.Remove(deletedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Movielist");
+        }
     }
 }

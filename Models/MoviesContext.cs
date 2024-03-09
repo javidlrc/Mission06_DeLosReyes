@@ -10,6 +10,7 @@ namespace Mission6.Models
         }
         //helooooooo
         public DbSet<Movies> Movies { get; set; }
+        public DbSet<Categories> Categories { get; set; }
     }
 }
 
